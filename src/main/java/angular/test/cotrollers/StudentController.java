@@ -1,6 +1,7 @@
 package angular.test.cotrollers;
 
 import angular.test.models.Student;
+import angular.test.models.StudentsTotals;
 import angular.test.service.student.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,13 +31,21 @@ public class StudentController {
     }
 
     @RequestMapping("/student/{id}")
-    public @ResponseBody Student getStudentById(@PathVariable int id) {
+    @ResponseBody
+    public Student getStudentById(@PathVariable int id) {
         return studentService.getStudentById(id);
     }
 
     @RequestMapping("/students/{name}")
-    public @ResponseBody List<Student> getStudentByName(@PathVariable String name) {
+    @ResponseBody
+    public List<Student> getStudentByName(@PathVariable String name) {
         return studentService.getStudentsByName(name);
+    }
+
+    @RequestMapping("/studentsTotals")
+    @ResponseBody
+    public StudentsTotals getStudentsTotals() {
+        return studentService.getStudentsTotals();
     }
 
 }

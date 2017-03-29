@@ -3,6 +3,7 @@ package angular.test.service.student;
 import angular.test.models.City;
 import angular.test.models.Country;
 import angular.test.models.Student;
+import angular.test.models.StudentsTotals;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -119,5 +120,41 @@ public class StudentServiceImpl implements StudentService {
         }
 
         return studentList;
+    }
+
+    @Override
+    public StudentsTotals getStudentsTotals() {
+        final StudentsTotals studentsTotals= new StudentsTotals();
+
+        PreparedStatement ps = null;
+
+        try {
+            ps = connection.prepareStatement("SELECT COALESCE(Gender) as Gender, COUNT(*) AS Total FROM tblStudents GROUP BY Gender");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                String sex = rs.getString("Gender");
+
+                if(sex.equals("Female")) {
+                    studentsTotals.setFemales(rs.getInt("Total"));
+                } else {
+                    studentsTotals.setMales(rs.getInt("Total"));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (ps != null)
+                try {
+                    ps.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+        }
+
+        studentsTotals.setTotal(studentsTotals.getFemales() + studentsTotals.getMales());
+
+        return studentsTotals;
     }
 }

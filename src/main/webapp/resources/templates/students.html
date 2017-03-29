@@ -1,10 +1,10 @@
-<h1>List of Students</h1>
+<h1>List of Students ({{studentsTotals.total}})</h1>
 
 Search by name: <input type="text" placeholder="Type name" ng-model="name">
 <button ng-click="studentsSearch()">Search</button>
 <ul>
     <li ng-repeat="student in students">
-        <a ui-sref="studentDetails({id:student.id})">{{student.name}}</a>
+        <a ui-sref="studentParent.studentDetails({id:student.id})">{{student.name}}</a>
     </li>
 </ul>
 
