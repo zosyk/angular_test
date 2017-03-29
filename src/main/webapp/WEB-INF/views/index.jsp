@@ -3,7 +3,7 @@
 <head>
     <title></title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.js"></script>
     <script src="../../resources/js/index.js"></script>
     <link href="../../resources/css/style12.css" rel="stylesheet" />
 </head>
@@ -18,12 +18,12 @@
     </tr>
     <tr>
         <td class="leftMenu">
-            <a href="#home">Home</a>
-            <a href="#courses">Courses</a>
-            <a href="#students">Students</a>
+            <a ui-sref="home" ui-sref-active="activeState">Home</a>
+            <a ui-sref="courses" ui-sref-active="activeState">Courses</a>
+            <a ui-sref="students" ui-sref-active="activeState">Students</a>
         </td>
         <td class="mainContent">
-            <ng-view></ng-view>
+            <ui-view></ui-view>
         </td>
     </tr>
     <tr>
